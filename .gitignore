@@ -1,0 +1,25 @@
+# Node modules directory
+node_modules/
+
+# Logs
+logs/
+*.log
+
+# Dependency directories
+jspm_packages/
+bower_components/
+
+# Environment variables
+.env
+
+# IDE specific files
+.vscode/
+.idea/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Build directories
+dist/
+build/
