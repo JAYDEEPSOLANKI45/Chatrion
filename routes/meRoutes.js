@@ -10,7 +10,6 @@ router.get("/",isLogined,wrapAsync(async(req,res,next)=>{
         'User-Agent': 'Chatrion'
     };
     const data=await axios.get("https://oauth.reddit.com/api/v1/me",{headers});
-    console.log(data.data);
     res.send(data.data);
 }))
 
@@ -58,5 +57,15 @@ router.get("/karma",isLogined,wrapAsync(async(req,res,next)=>{
     const data=await axios.get("https://oauth.reddit.com/api/v1/me/karma",{headers});
     res.send(data.data);
 }));
+
+router.get("/subreddit/:where",isLogined,wrapAsync(async(req,res,next)=>{
+    const headers = {
+        "Authorization":`Bearer ${req.session.access_token}`,
+        'User-Agent': 'Chatrion'
+    };
+    const data=await axios.get(`https://oauth.reddit.com/subreddits/mine/${req.params.where}`,{headers});
+    res.send(data.data);
+}));
+
 
 module.exports=router;
