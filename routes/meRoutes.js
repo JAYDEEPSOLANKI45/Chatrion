@@ -58,6 +58,17 @@ router.get("/karma",isLogined,wrapAsync(async(req,res,next)=>{
     res.send(data.data);
 }));
 
+//type=best,top,new,hot
+router.get("/feed/:type",isLogined,wrapAsync(async(req,res,next)=>{
+    let {type}=req.params;
+    const headers = {
+        "Authorization":`Bearer ${req.session.access_token}`,
+        'User-Agent': 'Chatrion'
+    };
+    const data=await axios.get(`https://oauth.reddit.com/${type}`,{headers});
+    res.send(data.data);
+}));
+
 router.get("/subreddit/:where",isLogined,wrapAsync(async(req,res,next)=>{
     const headers = {
         "Authorization":`Bearer ${req.session.access_token}`,

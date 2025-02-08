@@ -4,6 +4,17 @@ const { default: axios } = require("axios");
 const router=express.Router();
 const {stringify}=require("flatted");
 
+//get posts from a subreddit type=new/hot/top
+router.get("/:subredditname/:type",isLogined,wrapAsync(async(req,res,next)=>{
+    let {subredditname,type}=req.params;
+    let headers={
+        "Authorization":`Bearer ${req.session.access_token}`,
+        'User-Agent': 'Chatrion'
+    };
+    const data=await axios.get(`https://oauth.reddit.com/r/${subredditname}/${type}`,{headers});
+    res.send(data.data);
+}));
+
 //search on the subreddit
 router.get("/:subredditname/search",isLogined,wrapAsync(async(req,res,next)=>{
     let {subredditname}=req.params;
