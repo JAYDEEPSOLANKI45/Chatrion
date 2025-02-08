@@ -48,6 +48,7 @@ const subredditRoutes=require("./routes/subredditRoutes");
 const searchRoutes=require("./routes/searchRoutes");
 app.use("/subreddit",subredditRoutes);
 app.use("/me",meRoutes);
+app.use("/search",searchRoutes);
 
 app.get("/",(req,res)=>
 {

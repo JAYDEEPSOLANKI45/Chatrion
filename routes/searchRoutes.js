@@ -15,4 +15,14 @@ router.get("/",isLogined,wrapAsync(async(req,res,next)=>{
     res.send(data.data);
 }));
 
+// search for reddit names (list of names) that begins with the query string
+router.get("/subreddit",isLogined,wrapAsync(async(req,res,next)=>{
+    let {query}=req.query;
+    let headers={
+        "Authorization":`Bearer ${req.session.access_token}`,
+        'User-Agent': 'Chatrion'
+    };
+    const data=await axios.get(`https://oauth.reddit.com/api/search_reddit_names?query=${query}&include_over_18=false&exact=false`,{headers});
+    res.send(data.data);
+}));
 module.exports=router;
