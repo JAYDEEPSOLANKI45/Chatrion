@@ -44,6 +44,9 @@ main().then(()=>console.log("Connected")).catch(()=>console.log("Error occured w
 
 // routes
 const meRoutes=require("./routes/meRoutes");
+const subredditRoutes=require("./routes/subredditRoutes");
+const searchRoutes=require("./routes/searchRoutes");
+app.use("/subreddit",subredditRoutes);
 app.use("/me",meRoutes);
 
 app.get("/",(req,res)=>
